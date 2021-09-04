@@ -5,6 +5,10 @@ require_once __DIR__ . '/vendor/autoload.php';
 require_once __DIR__ . '/inc/db.php';
 // dump($pdo);
 
+$sqlRef = 'SELECT * FROM `todo`';
+$pdoStatementRef = $pdo->query($sqlRef);
+$todolistRef = $pdoStatementRef->fetchAll(PDO::FETCH_ASSOC);
+
 $name = '';
 
 // Si je soumet mon formulaire
@@ -14,8 +18,18 @@ if (!empty($_POST)) {
 
     // Je valide mes informations
     if ($name === '') {
+        // Si le champ est vide
         exit('Votre champ est vide !');
+    } else {
+        // Si le nom du todo est déà dans la base de données
+        foreach ($todolistRef as $todo) {
+            if ($todo['name'] === $name) {
+                exit('Ce nom est déjà dans la liste (pensez à regarder et supprimer vos todo en DONE )');
+            }
+        }
     }
+
+
 
     // Je prepare ma requete sql qui va ajouter le nouveau todo dans ma liste
     $sql = "
@@ -31,8 +45,8 @@ if (!empty($_POST)) {
     if ($affectedRows === 1) {
         header('Location: index.php');
         exit();
-    }    
-    exit('Une erreur s\'est produite !');   
+    }
+    exit('Une erreur s\'est produite !');
 }
 
 // Je vais recuperer les variable contenus dans GET
@@ -50,8 +64,10 @@ if (!empty($_GET)) {
         case 'remove':
             $sql = "DELETE FROM `todo` WHERE id = '{$id}'";
             break;
+        case 'todo':
+            $sql = "UPDATE `todo` SET `fait` = '0' WHERE id = '{$id}'";
+            break;
     }
-
 
     // J'execute ma requete et recupere le nombre de lignes affectées
     $affectedRows = $pdo->exec($sql);
@@ -61,9 +77,17 @@ if (!empty($_GET)) {
     if ($affectedRows === 1) {
         header('Location: index.php');
         exit();
-    }    
-    exit('Une erreur s\'est produite !');   
+    }
+    exit('Une erreur s\'est produite !');
 }
+
+// Je vais ecrire mes requetes custom pour recuperer ma liste sous differentes formes
+// J'aurai pu utiliser un autre fichier pour les stocker mais je decide de le faire ici pour le moment
+$sqlDone = 'SELECT * FROM `todo` WHERE `fait` = 1';
+$pdoStatementDone = $pdo->query($sqlDone);
+$todolistDone = $pdoStatementDone->fetchAll(PDO::FETCH_ASSOC);
+dump($todolistDone);
+
 
 // Je prépare ma requête sql
 $sql = 'SELECT * FROM `todo` WHERE `fait` = 0';
@@ -74,6 +98,7 @@ $pdoStatement = $pdo->query($sql);
 // Je formate mon résultat sous forme de tableau associatif et je le stocke dans ma variable $todolist
 $todolist = $pdoStatement->fetchAll(PDO::FETCH_ASSOC);
 
-// dump($todolist);
+dump($todolistRef);
+dump($todolist);
 
 require_once __DIR__ . '/views/todolist.php';

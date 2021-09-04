@@ -17,7 +17,7 @@
             <h1 class="header_title">
                 TODO LIST
             </h1>
-            <p class="header_desc">
+            <p class="header_desc lead">
                 Voici une application toute simple permettant de répertorier vos todos, mais aussi d'en ajouter et d'en supprimer !
             </p>
         </div>
@@ -37,13 +37,39 @@
                             </p>
                         </div>
                         <div class="btn-group ms-1" role="group">
-                            <a href="index.php?action=done&id=<?= $todo['id'] ?>" class="btn btn-outline-success"><i class="bi bi-check2-circle"></i></a>
-                            <a href="index.php?action=remove&id=<?= $todo['id'] ?>" class="btn btn-outline-danger"><i class="bi bi-x-circle"></i></a>
+                            <a href="index.php?action=done&id=<?= $todo['id'] ?>" class="btn btn-outline-success"><i class="bi bi-check2-circle"></i> Done</a>
+                            <a href="index.php?action=remove&id=<?= $todo['id'] ?>" class="btn btn-outline-danger"><i class="bi bi-x-circle"></i> Supprimer</a>
                         </div>
                     </div>
                 </li>
             <?php endforeach ?>
         </ul>
+        <?php if (!empty($todolistDone)) : ?>
+            <div class="header mt-5">
+                <h2 class="header_title">
+                    DONE
+                </h2>
+                <p class="header_desc lead">
+                    Ici, se trouve la liste de tous vos todo qui sont effectués. Vous pouvez les garder ici, les repasser en todo ou bien les supprimer !
+                </p>
+            </div>
+            <ul class="list-group">
+                <?php foreach ($todolistDone as $todo) : ?>
+                    <li class="list-group-item">
+                        <div class="d-flex justify-content-between">
+                            <div class="me-1">
+                                <p class="my-1">
+                                    <?= $todo['name'] ?>
+                                </p>
+                            </div>
+                            <div class="btn-group ms-1" role="group">
+                                <a href="index.php?action=todo&id=<?= $todo['id'] ?>" class="btn btn-outline-primary"><i class="bi bi-check2-circle"></i> Todo</a>
+                                <a href="index.php?action=remove&id=<?= $todo['id'] ?>" class="btn btn-outline-danger"><i class="bi bi-x-circle"></i> Supprimer</a>
+                            </div>
+                        </div>
+                    </li>
+                <?php endforeach ?>
+            <?php endif ?>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
 </body>
