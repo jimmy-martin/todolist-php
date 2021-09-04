@@ -11,7 +11,7 @@ $name = '';
 if (!empty($_POST)) {
     // Je recupere les valeurs de POST dans mes variables
     $name = isset($_POST['name']) ? $_POST['name'] : '';
-    
+
     // Je valide mes informations
     if ($name === '') {
         exit('Votre champ est vide !');
@@ -36,8 +36,38 @@ if (!empty($_POST)) {
     }
 }
 
+// Je vais recuperer les variable contenus dans GET
+if (!empty($_GET)) {
+    // Je recupere les valeurs de POST dans mes variables
+    $id = isset($_GET['id']) ? (int)$_GET['id'] : '';
+    $action = isset($_GET['action']) ? $_GET['action'] : '';
+    $sql = '';
+
+    // Je prepare ma requete en fonction de l'action souhaitée
+    switch ($action) {
+        case 'done':
+            $sql = "INSERT INTO `todo` (`fait`) VALUES (0) WHERE id = '{$id}'";
+        case 'edit':
+            // $sql = "UPDATE `todo` SET `name` = ";
+        case 'remove':
+            $sql = "DELETE FROM `todo` WHERE id = '{$id}'";
+    }
+
+    // J'execute ma requete et recupere le nombre de lignes affectées
+    $affectedRows = $pdo->exec($sql);
+
+    // dump($affectedRows);
+
+    if ($affectedRows === 1) {
+        header('Location: index.php');
+        exit();
+    } else {
+        exit('Une erreur s\'est produite !');
+    }
+}
+
 // Je prépare ma requête sql
-$sql = 'SELECT * FROM `todo`';
+$sql = 'SELECT * FROM `todo` WHERE `fait` = 0';
 
 // Je l'execute et stocke le résultat dans une variable
 $pdoStatement = $pdo->query($sql);
