@@ -31,9 +31,8 @@ if (!empty($_POST)) {
     if ($affectedRows === 1) {
         header('Location: index.php');
         exit();
-    } else {
-        exit('Une erreur s\'est produite !');
-    }
+    }    
+    exit('Une erreur s\'est produite !');   
 }
 
 // Je vais recuperer les variable contenus dans GET
@@ -46,10 +45,13 @@ if (!empty($_GET)) {
     // Je prepare ma requete en fonction de l'action souhaitée
     switch ($action) {
         case 'done':
-            $sql = "INSERT INTO `todo` (`fait`) VALUES (0) WHERE id = '{$id}'";
+            $sql = "UPDATE `todo` SET `fait` = '1' WHERE id = '{$id}'";
+            break;
         case 'remove':
             $sql = "DELETE FROM `todo` WHERE id = '{$id}'";
+            break;
     }
+
 
     // J'execute ma requete et recupere le nombre de lignes affectées
     $affectedRows = $pdo->exec($sql);
@@ -59,9 +61,8 @@ if (!empty($_GET)) {
     if ($affectedRows === 1) {
         header('Location: index.php');
         exit();
-    } else {
-        exit('Une erreur s\'est produite !');
-    }
+    }    
+    exit('Une erreur s\'est produite !');   
 }
 
 // Je prépare ma requête sql
