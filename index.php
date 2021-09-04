@@ -47,8 +47,6 @@ if (!empty($_GET)) {
     switch ($action) {
         case 'done':
             $sql = "INSERT INTO `todo` (`fait`) VALUES (0) WHERE id = '{$id}'";
-        case 'edit':
-            // $sql = "UPDATE `todo` SET `name` = ";
         case 'remove':
             $sql = "DELETE FROM `todo` WHERE id = '{$id}'";
     }

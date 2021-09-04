@@ -38,7 +38,6 @@
                         </div>
                         <div class="btn-group ms-1" role="group">
                             <a href="index.php?action=done&id=<?= $todo['id'] ?>" class="btn btn-outline-success"><i class="bi bi-check2-circle"></i></a>
-                            <a href="index.php?action=edit&id=<?= $todo['id'] ?>" class="btn btn-outline-primary"><i class="bi bi-pencil-square"></i></a>
                             <a href="index.php?action=remove&id=<?= $todo['id'] ?>" class="btn btn-outline-danger"><i class="bi bi-x-circle"></i></a>
                         </div>
                     </div>
