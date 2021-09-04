@@ -38,6 +38,10 @@
                 <a href="index.php" class="btn btn-dark mb-3">Annuler le tri</a><br>
             <?php endif ?>
         <?php endif ?>
+        <div class="mb-2">
+            <span class="badge dark">Très important</span>
+            <span class="badge warning">Important</span>
+        </div>
         <ul class="list-group">
             <?php foreach ($todolist as $todo) :
                 $color = 'list-group-item-light';

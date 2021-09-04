@@ -24,3 +24,15 @@ body {
 .input-btn:active:focus {
     box-shadow: 0 0 0 .25rem #EAD7E7;
 }
+
+.badge{
+    color: black;
+}
+
+.dark {
+    background: #d3d3d4;
+}
+
+.warning {
+    background: #fff3cd;
+}
