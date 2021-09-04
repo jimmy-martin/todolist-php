@@ -12,8 +12,8 @@
 </head>
 
 <body>
-    <div class="container">
-        <div class="header">
+    <div class="container text-center">
+        <div class="header m-3">
             <h1 class="header_title">
                 TODO LIST
             </h1>
@@ -21,17 +21,27 @@
                 Voici une application toute simple permettant de répertorier vos todos, mais aussi d'en ajouter et d'en supprimer !
             </p>
         </div>
-        <div class="input-group mb-3">
-            <input type="text" class="input form-control" placeholder="Todo name..." aria-label="Todo name..." aria-describedby="button-addon2">
-            <button class="input-btn btn btn-outline-secondary" type="button" id="button-addon2">Button</button>
-        </div>
+        <form action="" method="post">
+            <div class="input-group mb-3">
+                <input type="text" class="input form-control" placeholder="Todo name..." aria-label="Todo name..." aria-describedby="button-addon2" name="name">
+                <button class="input-btn btn btn-outline-secondary" type="submit" id="button-addon2">Button</button>
+            </div>
+        </form>
         <ul class="list-group">
             <?php foreach ($todolist as $todo) : ?>
                 <li class="list-group-item">
-                    <?= $todo['name'] ?>
-                    <button type="button" class="btn btn-outline-success"></button>
-                    <button type="button" class="btn btn-outline-primary"></button>
-                    <button type="button" class="btn btn-outline-danger"></button>
+                    <div class="d-flex justify-content-between">
+                        <div class="me-1">
+                            <p class="my-1">
+                                <?= $todo['name'] ?>
+                            </p>
+                        </div>
+                        <div class="btn-group ms-1" role="group">
+                            <a href="index.php?doneId=<?= $todo['id'] ?>" class="btn btn-outline-success"><i class="bi bi-check2-circle"></i></a>
+                            <a href="index.php?editId=<?= $todo['id'] ?>" class="btn btn-outline-primary"><i class="bi bi-pencil-square"></i></a>
+                            <a href="index.php?removeId=<?= $todo['id'] ?>" class="btn btn-outline-danger"><i class="bi bi-x-circle"></i></a>
+                        </div>
+                    </div>
                 </li>
             <?php endforeach ?>
         </ul>
