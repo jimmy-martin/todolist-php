@@ -7,20 +7,20 @@ body {
     background-color: var(--primary);
 }
 
-.form-control:focus,
-.btn:hover {
+.input:focus,
+.input-btn:hover {
     border-color: var(--secondary);
     box-shadow: 0 0 0 .25rem var(--secondary);
 }
 
-.btn:hover,
-.btn:focus {
+.input-btn:hover,
+.input-btn:focus {
     color: black;
     background-color: #EAD7E7;
     box-shadow: 0 0 0 .25rem var(--secondary);
     border-color: var(--secondary);
 }
 
-.btn-outline-secondary:active:focus {
+.input-btn:active:focus {
     box-shadow: 0 0 0 .25rem #EAD7E7;
 }

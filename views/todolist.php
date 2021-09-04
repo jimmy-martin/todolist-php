@@ -22,13 +22,16 @@
             </p>
         </div>
         <div class="input-group mb-3">
-            <input type="text" class="form-control" placeholder="Todo name..." aria-label="Todo name..." aria-describedby="button-addon2">
-            <button class="btn btn-outline-secondary" type="button" id="button-addon2">Button</button>
+            <input type="text" class="input form-control" placeholder="Todo name..." aria-label="Todo name..." aria-describedby="button-addon2">
+            <button class="input-btn btn btn-outline-secondary" type="button" id="button-addon2">Button</button>
         </div>
         <ul class="list-group">
             <?php foreach ($todolist as $todo) : ?>
                 <li class="list-group-item">
                     <?= $todo['name'] ?>
+                    <button type="button" class="btn btn-outline-success"></button>
+                    <button type="button" class="btn btn-outline-primary"></button>
+                    <button type="button" class="btn btn-outline-danger"></button>
                 </li>
             <?php endforeach ?>
         </ul>
