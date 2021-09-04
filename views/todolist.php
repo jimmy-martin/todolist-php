@@ -34,8 +34,15 @@
             <?php endif ?>
         <?php endif ?>
         <ul class="list-group">
-            <?php foreach ($todolist as $todo) : ?>
-                <li class="list-group-item">
+            <?php foreach ($todolist as $todo) :
+                $color = 'list-group-item-light';
+                if ($todo['importance'] == 1) {
+                    $color = 'list-group-item-dark';
+                } else if ($todo['importance'] == 2) {
+                    $color = 'list-group-item-warning';
+                }
+            ?>
+                <li class="list-group-item <?= $color ?>">
                     <div class="d-flex justify-content-between">
                         <div class="me-1">
                             <p class="my-1">
@@ -43,8 +50,8 @@
                             </p>
                         </div>
                         <div class="btn-group ms-1" role="group">
-                            <a href="index.php?action=done&id=<?= $todo['id'] ?>" class="btn btn-outline-success"><i class="bi bi-check2-circle"></i> Done</a>
-                            <a href="index.php?action=remove&id=<?= $todo['id'] ?>" class="btn btn-outline-danger"><i class="bi bi-x-circle"></i> Supprimer</a>
+                            <a href="index.php?<?= !empty($_GET['order']) ? 'order=' . $_GET['order'] . '&' : '' ?>action=done&id=<?= $todo['id'] ?>" class="btn btn-outline-success"><i class="bi bi-check2-circle"></i> Done</a>
+                            <a href="index.php?<?= !empty($_GET['order']) ? 'order=' . $_GET['order'] . '&' : '' ?>action=remove&id=<?= $todo['id'] ?>" class="btn btn-outline-danger"><i class="bi bi-x-circle"></i> Supprimer</a>
                         </div>
                     </div>
                 </li>
@@ -69,8 +76,8 @@
                                 </p>
                             </div>
                             <div class="btn-group ms-1" role="group">
-                                <a href="index.php?action=todo&id=<?= $todo['id'] ?>" class="btn btn-outline-primary"><i class="bi bi-check2-circle"></i> Todo</a>
-                                <a href="index.php?action=remove&id=<?= $todo['id'] ?>" class="btn btn-outline-danger"><i class="bi bi-x-circle"></i> Supprimer</a>
+                                <a href="index.php?<?= !empty($_GET['order']) ? 'order=' . $_GET['order'] . '&' : '' ?>action=todo&id=<?= $todo['id'] ?>" class="btn btn-outline-primary"><i class="bi bi-check2-circle"></i> Todo</a>
+                                <a href="index.php?<?= !empty($_GET['order']) ? 'order=' . $_GET['order'] . '&' : '' ?>action=remove&id=<?= $todo['id'] ?>" class="btn btn-outline-danger"><i class="bi bi-x-circle"></i> Supprimer</a>
                             </div>
                         </div>
                     </li>

@@ -8,7 +8,7 @@ require_once __DIR__ . '/inc/db.php';
 $sqlRef = 'SELECT * FROM `todo`';
 $pdoStatementRef = $pdo->query($sqlRef);
 $todolistRef = $pdoStatementRef->fetchAll(PDO::FETCH_ASSOC);
-
+$sql = '';
 $name = '';
 
 // Si je soumet mon formulaire
@@ -43,14 +43,14 @@ if (!empty($_POST)) {
     // dump($affectedRows);
 
     if ($affectedRows === 1) {
-        header('Location: index.php');
+        header('Location: index.php' . (!empty($_GET['order']) ? '?order=' . $_GET['order'] : ''));
         exit();
     }
     exit('Une erreur s\'est produite !');
 }
 
 // Je vais recuperer les variable contenus dans GET
-if (!empty($_GET['id']) && $_GET['action']) {
+if (!empty($_GET['id']) && !empty($_GET['action'])) {
     // Je recupere les valeurs de POST dans mes variables
     $id = isset($_GET['id']) ? (int)$_GET['id'] : '';
     $action = isset($_GET['action']) ? $_GET['action'] : '';
@@ -75,7 +75,7 @@ if (!empty($_GET['id']) && $_GET['action']) {
     // dump($affectedRows);
 
     if ($affectedRows === 1) {
-        header('Location: index.php');
+        header('Location: index.php' . (!empty($_GET['order']) ? '?order=' . $_GET['order'] : ''));
         exit();
     }
     exit('Une erreur s\'est produite !');
@@ -83,8 +83,7 @@ if (!empty($_GET['id']) && $_GET['action']) {
 
 
 
-// Je vais ecrire mes requetes custom pour recuperer ma liste sous differentes formes
-// J'aurai pu utiliser un autre fichier pour les stocker mais je decide de le faire ici pour le moment
+// Je recupere ici un tableau avec les todo qui sont effectuees
 $sqlDone = 'SELECT * FROM `todo` WHERE `fait` = 1';
 $pdoStatementDone = $pdo->query($sqlDone);
 $todolistDone = $pdoStatementDone->fetchAll(PDO::FETCH_ASSOC);
@@ -99,10 +98,11 @@ if (!empty($_GET['order'])) {
     $order = trim($_GET['order']);
     if ($order == 'importance') {
         $sql = '
-            SELECT * 
-            FROM `todo`
-            ORDER BY `importance`
-        ';
+        SELECT * 
+        FROM `todo`
+        WHERE `fait` = 0
+        ORDER BY `importance`
+    ';
     } else {
         exit('Ceci n\'est pas un nom de colonne !');
     }
