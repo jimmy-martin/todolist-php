@@ -17,7 +17,7 @@ Voici les différentes étapes à suivre afin que l'application puisse fonctionn
   - cocher la case `Grant all privileges to a database with same name (but you'll have to create it manually)`
   - puis appuyer sur `Save`
 
-- se rendre dans `Import` puis sélectionner le fichier `todolist.sql` qui se trouve dans le dossier `docs` du repo
+- se rendre dans `Import` puis sélectionner le fichier `todolist.sql` qui se trouve dans le dossier `docs` du repo puis appuyer sur `Execute`
 
 L'installation de la base de données est maintenant faite.
 
