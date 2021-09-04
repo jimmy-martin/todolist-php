@@ -24,7 +24,7 @@
         <form action="" method="post">
             <div class="input-group mb-3">
                 <input type="text" class="input form-control" placeholder="Todo name..." aria-label="Todo name..." aria-describedby="button-addon2" name="name">
-                <button class="input-btn btn btn-outline-secondary" type="submit" id="button-addon2">Button</button>
+                <button class="input-btn btn btn-outline-secondary" type="submit" id="button-addon2">Ajouter !</button>
             </div>
         </form>
         <ul class="list-group">
