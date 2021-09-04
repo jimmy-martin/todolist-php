@@ -12,8 +12,8 @@
 </head>
 
 <body>
-    <div class="container text-center">
-        <div class="header m-3">
+    <div class="container">
+        <div class="header m-3 text-center">
             <h1 class="header_title">
                 TODO LIST
             </h1>
@@ -27,6 +27,10 @@
                 <button class="input-btn btn btn-outline-secondary" type="submit" id="button-addon2">Ajouter !</button>
             </div>
         </form>
+        <a href="index.php?order=importance" class="btn btn-primary mb-3">Trier par importance</a>&nbsp;
+        <?php if (!empty($_GET['order'])) : ?>
+            <a href="index.php" class="btn btn-dark mb-3">Annuler le tri</a><br>
+        <?php endif ?>
         <ul class="list-group">
             <?php foreach ($todolist as $todo) : ?>
                 <li class="list-group-item">
@@ -45,7 +49,7 @@
             <?php endforeach ?>
         </ul>
         <?php if (!empty($todolistDone)) : ?>
-            <div class="header mt-5">
+            <div class="header mt-5 text-center">
                 <h2 class="header_title">
                     DONE
                 </h2>

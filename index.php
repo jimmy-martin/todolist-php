@@ -50,7 +50,7 @@ if (!empty($_POST)) {
 }
 
 // Je vais recuperer les variable contenus dans GET
-if (!empty($_GET)) {
+if (!empty($_GET['id']) && $_GET['action']) {
     // Je recupere les valeurs de POST dans mes variables
     $id = isset($_GET['id']) ? (int)$_GET['id'] : '';
     $action = isset($_GET['action']) ? $_GET['action'] : '';
@@ -81,6 +81,8 @@ if (!empty($_GET)) {
     exit('Une erreur s\'est produite !');
 }
 
+
+
 // Je vais ecrire mes requetes custom pour recuperer ma liste sous differentes formes
 // J'aurai pu utiliser un autre fichier pour les stocker mais je decide de le faire ici pour le moment
 $sqlDone = 'SELECT * FROM `todo` WHERE `fait` = 1';
@@ -88,9 +90,23 @@ $pdoStatementDone = $pdo->query($sqlDone);
 $todolistDone = $pdoStatementDone->fetchAll(PDO::FETCH_ASSOC);
 dump($todolistDone);
 
-
 // Je prépare ma requête sql
 $sql = 'SELECT * FROM `todo` WHERE `fait` = 0';
+
+// Si un tri a été demandé, on réécrit la requête
+if (!empty($_GET['order'])) {
+    // Récupération du tri choisi
+    $order = trim($_GET['order']);
+    if ($order == 'importance') {
+        $sql = '
+            SELECT * 
+            FROM `todo`
+            ORDER BY `importance`
+        ';
+    } else {
+        exit('Ceci n\'est pas un nom de colonne !');
+    }
+}
 
 // Je l'execute et stocke le résultat dans une variable
 $pdoStatement = $pdo->query($sql);
