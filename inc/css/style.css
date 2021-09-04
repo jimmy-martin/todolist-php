@@ -8,7 +8,8 @@ body {
 }
 
 .input:focus,
-.input-btn:hover {
+.input-btn:hover,
+.select:focus {
     border-color: var(--secondary);
     box-shadow: 0 0 0 .25rem var(--secondary);
 }

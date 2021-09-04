@@ -24,7 +24,7 @@
         <form action="" method="post">
             <div class="input-group mb-3">
                 <input type="text" class="input form-control" placeholder="Todo name..." aria-label="Todo name..." aria-describedby="button-addon2" name="name">
-                <select class="form-select" aria-label="Default select example" name="importance">
+                <select class="select form-select" aria-label="Default select example" name="importance">
                     <option value="3" selected>Importance du todo ( facultatif )</option>
                     <option value="1">Très important</option>
                     <option value="2">Important</option>

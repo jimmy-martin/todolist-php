@@ -83,13 +83,13 @@ if (!empty($_GET['id']) && !empty($_GET['action'])) {
 
 
 // Je recupere ici un tableau avec les todo qui sont effectuees
-$sqlDone = 'SELECT * FROM `todo` WHERE `fait` = 1';
+$sqlDone = 'SELECT * FROM `todo` WHERE `fait` = 1 ORDER BY `name`';
 $pdoStatementDone = $pdo->query($sqlDone);
 $todolistDone = $pdoStatementDone->fetchAll(PDO::FETCH_ASSOC);
 // dump($todolistDone);
 
 // Je prépare ma requête sql
-$sql = 'SELECT * FROM `todo` WHERE `fait` = 0';
+$sql = 'SELECT * FROM `todo` WHERE `fait` = 0 ORDER BY `id` DESC';
 
 // Si un tri a été demandé, on réécrit la requête
 if (!empty($_GET['order'])) {
