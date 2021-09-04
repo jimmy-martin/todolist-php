@@ -24,6 +24,11 @@
         <form action="" method="post">
             <div class="input-group mb-3">
                 <input type="text" class="input form-control" placeholder="Todo name..." aria-label="Todo name..." aria-describedby="button-addon2" name="name">
+                <select class="form-select" aria-label="Default select example" name="importance">
+                    <option value="3" selected>Importance du todo ( facultatif )</option>
+                    <option value="1">Très important</option>
+                    <option value="2">Important</option>
+                </select>
                 <button class="input-btn btn btn-outline-secondary" type="submit" id="button-addon2">Ajouter !</button>
             </div>
         </form>
@@ -67,8 +72,15 @@
                 </p>
             </div>
             <ul class="list-group">
-                <?php foreach ($todolistDone as $todo) : ?>
-                    <li class="list-group-item">
+                <?php foreach ($todolistDone as $todo) :
+                    $color = 'list-group-item-light';
+                    if ($todo['importance'] == 1) {
+                        $color = 'list-group-item-dark';
+                    } else if ($todo['importance'] == 2) {
+                        $color = 'list-group-item-warning';
+                    }
+                ?>
+                    <li class="list-group-item <?= $color ?>">
                         <div class="d-flex justify-content-between">
                             <div class="me-1">
                                 <p class="my-1">

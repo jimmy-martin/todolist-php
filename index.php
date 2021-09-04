@@ -15,6 +15,7 @@ $name = '';
 if (!empty($_POST)) {
     // Je recupere les valeurs de POST dans mes variables
     $name = isset($_POST['name']) ? $_POST['name'] : '';
+    $importance = isset($_POST['importance']) ? $_POST['importance'] : '';
 
     // Je valide mes informations
     if ($name === '') {
@@ -29,12 +30,10 @@ if (!empty($_POST)) {
         }
     }
 
-
-
     // Je prepare ma requete sql qui va ajouter le nouveau todo dans ma liste
     $sql = "
-    INSERT INTO `todo` (`name`) 
-    VALUES ('{$name}')
+    INSERT INTO `todo` (`name`, `importance`) 
+    VALUES ('{$name}', '{$importance}')
     ";
 
     // J'execute ma requete et recupere le nombre de lignes affectées
@@ -87,7 +86,7 @@ if (!empty($_GET['id']) && !empty($_GET['action'])) {
 $sqlDone = 'SELECT * FROM `todo` WHERE `fait` = 1';
 $pdoStatementDone = $pdo->query($sqlDone);
 $todolistDone = $pdoStatementDone->fetchAll(PDO::FETCH_ASSOC);
-dump($todolistDone);
+// dump($todolistDone);
 
 // Je prépare ma requête sql
 $sql = 'SELECT * FROM `todo` WHERE `fait` = 0';
@@ -114,7 +113,7 @@ $pdoStatement = $pdo->query($sql);
 // Je formate mon résultat sous forme de tableau associatif et je le stocke dans ma variable $todolist
 $todolist = $pdoStatement->fetchAll(PDO::FETCH_ASSOC);
 
-dump($todolistRef);
-dump($todolist);
+// dump($todolistRef);
+// dump($todolist);
 
 require_once __DIR__ . '/views/todolist.php';
