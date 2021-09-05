@@ -1,6 +1,6 @@
 # todolist-php
 
-Todo application made with PHP and MySQL database
+Todo application made with PHP and MySQL database (for the moment it is only for O'clock students)
 
 ## Installation
 
